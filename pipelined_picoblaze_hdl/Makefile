@@ -27,14 +27,19 @@ setup:
 		vmap work work
 
 compile:
-		vlog -coveropt 3 +cover=sbfec +acc src/BIDS22pkg.sv $(SRCS)
+		vlog -coveropt 3 +cover=sbfec +acc duv/kcpsmx3_inc.sv $(SRCS) $(TBS)
 
 #opt:
-		#vopt top -o top_optimized +acc
+#		#vopt top -o top_optimized +acc
 
 release:
-		
+		mv add_test.mem $(SRC_DIR)/add_test.mem
+		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" +RUNS=5000 +InitialTask="ResetTask"
+
+testcases:
 		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" +RUNS=5000 +InitialTask="ResetTask"
+#		exec vsim
+#		mv $(wildcard /*.mem) $(SRC_DIR) 
 
 report:
 		vcover report -verbose func_cov > report_func_cov.txt
@@ -44,14 +49,15 @@ html:
 
 build: all 
 
-.PHONY: all clean setup compile opt release report html info
+.PHONY: all clean setup compile opt release report html info testcases
 
 .DEFAULT_GOAL	:= build
 
 clean:
-		rm -rf $(BUILD_DIR) $(TARGET)
+		rm -rf $(BUILD_DIR) $(TARGET) duv/add_test.mem
 		@echo "Cleanup done!"
 
 info:
 	@echo "Application:" $(TARGET)
-	@echo "Sources:" $(SRCS)
+	@echo "Design under Test:" $(SRCS)
+	@echo "Testbench:" $(TBS)

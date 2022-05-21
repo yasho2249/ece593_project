@@ -41,7 +41,6 @@ module top();
 	
 	
 	g.write_mem();
-	$display("done!");
 	end
 	end
 endmodule
