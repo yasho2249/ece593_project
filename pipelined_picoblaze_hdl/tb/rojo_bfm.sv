@@ -1,4 +1,14 @@
-nterface rojo_bfm;
+/*
+
+Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
+ECE 593: Final Project
+        Testebench for verification of RojoBlaze
+
+BFM module for RojoBlaze 
+***** WORK IN PROGRESS *****
+*/
+
+interface rojo_bfm;
 
 import kcpsmx3_inc::*;
 
