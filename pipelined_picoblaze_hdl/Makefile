@@ -13,11 +13,12 @@ TARGET		:= picoblaze_hdl
 # Directories for source files and builds
 SRC_DIR 	:= duv
 TB_DIR		:= tb
+RNDT_FL		:= tb/coverage.sv tb/rojo_bfm.sv
 BUILD_DIR 	:= work transcript *~ vsim.wlf *.log dgs.dbg dmslogdir covhtmlreport
 
 # sources 
 SRCS	:= $(wildcard $(SRC_DIR)/*.sv)
-TBS	:= $(wildcard $(TB_DIR)/tb_*.sv)
+TBS	:= $(filter-out $(RNDT_FL), $(wildcard $(TB_DIR)/*.sv))
 
 # build recipies
 all: setup compile opt $(TARGET)
@@ -58,3 +59,10 @@ info:
 	@echo "Application:" $(TARGET)
 	@echo "Design under Test:" $(SRCS)
 	@echo "Testbench:" $(TBS)
+	@echo "make clean: cleans the builds"
+	@echo "make setup: sets up the work lib"
+	@echo "make compile: compiles the files in duv/ and tb/"
+	@echo "make testcases: builds .mem for the DUV"
+	@echo "make release: runs the design unit"
+	@echo "make report: makes functional coverage report in txt format"
+	@echo "make html: makes GUI coverage report"
