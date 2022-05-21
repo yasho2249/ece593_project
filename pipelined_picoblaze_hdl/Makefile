@@ -17,7 +17,7 @@ BUILD_DIR 	:= work transcript *~ vsim.wlf *.log dgs.dbg dmslogdir covhtmlreport
 
 # sources 
 SRCS	:= $(wildcard $(SRC_DIR)/*.sv)
-TBS		:= $(wildcard $(TB_DIR)/*.sv)
+TBS	:= $(wildcard $(TB_DIR)/tb_*.sv)
 
 # build recipies
 all: setup compile opt $(TARGET)
@@ -33,11 +33,10 @@ compile:
 #		#vopt top -o top_optimized +acc
 
 release:
-		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" 
+		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
 
 testcases:
 		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
-		mv *.mem duv/
 
 report:
 		vcover report -verbose func_cov > report_func_cov.txt
@@ -52,7 +51,7 @@ build: all
 .DEFAULT_GOAL	:= build
 
 clean:
-		rm -rf $(BUILD_DIR) $(TARGET) duv/add_test.mem
+		rm -rf $(BUILD_DIR) $(TARGET) *.mem
 		@echo "Cleanup done!"
 
 info:
