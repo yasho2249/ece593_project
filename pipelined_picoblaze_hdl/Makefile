@@ -33,13 +33,11 @@ compile:
 #		#vopt top -o top_optimized +acc
 
 release:
-		mv add_test.mem $(SRC_DIR)/add_test.mem
-		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" +RUNS=5000 +InitialTask="ResetTask"
+		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" 
 
 testcases:
-		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" +RUNS=5000 +InitialTask="ResetTask"
-#		exec vsim
-#		mv $(wildcard /*.mem) $(SRC_DIR) 
+		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
+		mv *.mem duv/
 
 report:
 		vcover report -verbose func_cov > report_func_cov.txt
