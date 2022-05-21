@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/home/ywagle/common/Documents/ECE593/final_project/pipelined_picoblaze_hdl'
+vlib work
+vmap work work
+make: Leaving directory `/home/ywagle/common/Documents/ECE593/final_project/pipelined_picoblaze_hdl'
+ 
