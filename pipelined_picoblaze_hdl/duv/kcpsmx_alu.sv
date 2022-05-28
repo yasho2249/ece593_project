@@ -35,6 +35,8 @@
 
 import kcpsmx3_inc::*;
 
+
+
 module kcpsmx_alu(
     operation,
     shift_operation, shift_direction, shift_constant,
@@ -50,6 +52,7 @@ input [OPERAND_WIDTH-1:0]       operand_a, operand_b;	///< ALU operands.
 input                            carry_in;				///< Carry in.
 output logic                     zero_out;				///< Zero out.
 output logic                     carry_out;				///< Carry out.
+
 
 /** Adder/substracter second operand. */
 wire [OPERAND_WIDTH-1:0] addsub_b =
