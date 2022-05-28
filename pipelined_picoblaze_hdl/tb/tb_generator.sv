@@ -29,7 +29,7 @@ class generator;
 endclass //generator 
 
 class operation_generator;
-    rand opcode_t op;
+    rand var opcode_t op;
 
 endclass
 
