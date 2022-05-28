@@ -10,7 +10,7 @@ Since the picoblaze architecture reads only from the ROM, we have created a gene
 in the form of .mem files. 
 
 */
-typedef enum logic [4:0] {
+typedef enum bit [4:0] {
     LOAD        = 5'h00,
     INPUT       = 5'h02,
     FETCH       = 5'h03,
@@ -32,6 +32,7 @@ typedef enum logic [4:0] {
     RETURNI     = 5'h1c,
     INTERRUPT   = 5'h1e
 } opcode_t;
+
 
 class generator;
     
