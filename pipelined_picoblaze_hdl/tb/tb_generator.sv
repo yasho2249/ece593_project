@@ -10,7 +10,7 @@ Since the picoblaze architecture reads only from the ROM, we have created a gene
 in the form of .mem files. 
 
 */
-import kcpsmx3_inc::*;
+
 class generator;
     
     rand bit [5:0]  opcode;
@@ -29,7 +29,7 @@ class generator;
 endclass //generator 
 
 class operation_generator;
-    rand var opcode_t op;
+    rand var opcode_t;
 
 endclass
 
@@ -37,15 +37,14 @@ module top();
 	
 	bit [5:0]  opcode;
     bit [3:0]  sx, sy, constant;
-	opcode_t op;
-	kcpsmx_alu ka(.operation(op));
+	kcpsmx_alu(.operation(op));
 	
 	initial begin 
 	generator g = new();
-	operation_generator og =  new();
+	//operation_generator og =  new();
 	repeat (1024) begin
 	assert(g.randomize());
-	assert(og.randomize());
+	//assert(og.randomize());
 	g.write_mem();
 	end
 	end

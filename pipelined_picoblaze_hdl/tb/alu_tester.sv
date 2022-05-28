@@ -1,3 +1,13 @@
+/*
+
+Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
+ECE 593: Final Project
+        Testebench for verification of RojoBlaze
+
+TESTER module for RojoBlaze 
+***** WORK IN PROGRESS *****
+*/
+
 module alu_tester(rojo_bfm bfm);
 
 import kcpsmx3_inc::*;
@@ -49,9 +59,7 @@ initial begin
   
   if($value$plusargs("InitialTask=%s", Initial_Task));
   if(Initial_Task == "ResetTask")
-    bfm.reset_BIDmodel();
-  else if(Initial_Task == "UnlockTask")
-    bfm.unlock_BIDmodel();
+    bfm.reset_rojo();
   else
     $display("No initial task given");
 

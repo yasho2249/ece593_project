@@ -173,7 +173,9 @@ typedef struct packed {
         port_instr_t port;
         shift_instr_t shift;
         jump_instr_t jump;
+        /* verilator lint_off SYMRSVDWORD */
         int_instr_t interrupt;
+        /* verilator lint_on SYMRSVDWORD */
     } instr_type;
 } instr_t;
 endpackage
