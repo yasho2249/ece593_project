@@ -33,7 +33,7 @@ import kcpsmx3_inc::*;
 
 class opcode_generator;
 
-    rand bit opcode_t opcode;
+    rand opcode_t opcode;
 
 endclass
 

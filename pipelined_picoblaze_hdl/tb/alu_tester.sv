@@ -32,8 +32,8 @@ endfunction: get_operand_b
 
 initial begin
 
-    bit opcode_t t_operation;
-    bit shift_op_t t_shift_operation;
+    opcode_t t_operation;
+    shift_op_t t_shift_operation;
     bit t_shift_direction;
     bit t_shift_constant;
     bit [OPERAND_WIDTH-1:0] t_operand_a, t_operand_b;	
