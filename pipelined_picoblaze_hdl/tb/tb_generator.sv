@@ -29,17 +29,25 @@ class generator;
     endfunction
 endclass //generator 
 
+import kcpsmx3_inc::*;
+
+class opcode_generator;
+
+    rand bit opcode_t opcode;
+
+endclass
+
 module top();
 	
 	bit [5:0]  opcode;
-    	bit [3:0]  sx, sy, constant;
+    bit [3:0]  sx, sy, constant;
 	
 	initial begin 
 	generator g = new();
+	opcode_generator og = new();
 	repeat (1024) begin
 	assert(g.randomize());
-	
-	
+	assert(og.randomize());
 	g.write_mem();
 	end
 	end
