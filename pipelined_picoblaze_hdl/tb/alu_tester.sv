@@ -64,7 +64,7 @@ initial begin
   repeat (runs) begin: random_loop
 	
 
-	bfm.send_op_alu(opcode_t t_operation, shift_op_t t_shift_operation, t_shift_direction,
+	bfm.send_op_alu(t_operation, t_shift_operation, t_shift_direction,
                 t_shift_constant, t_carry_in, t_operand_a, t_operand_b);
 
   end: random_loop
@@ -72,4 +72,4 @@ initial begin
   
 end
 
-endmodule: BIDS22tester
+endmodule: alu_tester
