@@ -55,7 +55,7 @@ import kcpsmx3_inc::*;
 
 class opcode_generator;
 
-    rand opcode_t op;
+    rand opcode_t opcode;
 
 endclass
 
@@ -63,7 +63,7 @@ module top();
 	
 	bit [5:0]  opcode;
     bit [3:0]  sx, sy, constant;
-	opcode_t op;
+	opcode_t opcode;
 	
 	initial begin 
 	generator g = new();
@@ -71,7 +71,7 @@ module top();
 	repeat (1024) begin
 	assert(g.randomize());
 	assert(og.randomize());
-	$display("%b",op);
+	$display("%d",opcode);
 	g.write_mem();
 	end
 	end
