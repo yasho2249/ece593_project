@@ -48,6 +48,7 @@ module top();
 	repeat (1024) begin
 	assert(g.randomize());
 	assert(og.randomize());
+	display("%b",opcode);
 	g.write_mem();
 	end
 	end
