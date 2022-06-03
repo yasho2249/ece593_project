@@ -9,7 +9,7 @@ Coverage module consist of Input covergroups
 */
 
 
-module coverage_ifid (module_name bfm);
+module coverage_ifid (rojo_bfm bfm);
     
     import rojobpkg::*;
 
