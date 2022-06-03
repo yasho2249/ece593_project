@@ -33,10 +33,13 @@ compile:
 #opt:
 #		#vopt top -o top_optimized +acc
 
-release:
+instruction:
 		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
 
-testcases:
+tests:
+		vsim -coverage -vopt work.transaction_top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit"
+
+release:
 		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
 
 report:
@@ -47,7 +50,7 @@ html:
 
 build: all 
 
-.PHONY: all clean setup compile opt release report html info testcases
+.PHONY: all clean setup compile opt release report html info tests instruction
 
 .DEFAULT_GOAL	:= build
 
