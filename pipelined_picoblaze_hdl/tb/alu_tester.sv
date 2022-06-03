@@ -19,7 +19,7 @@ function bit [OPERAND_WIDTH-1:0] get_operand_a();
   bit [1:0] max_min;
   max_min = $random;
   if(max_min == 2'b00)
-    return 0;
+    return 0; 
   else if(max_min == 2'b11)
     return 1;
   else
