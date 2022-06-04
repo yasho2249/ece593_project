@@ -13,7 +13,7 @@ TARGET		:= picoblaze_hdl
 # Directories for source files and builds
 SRC_DIR 	:= duv
 TB_DIR		:= tb
-RNDT_FL		:= tb/coverage.sv tb/rojo_bfm.sv
+RNDT_FL		:= tb/coverage.sv tb/rojo_bfm.sv duv/rojo_ref_model.sv
 BUILD_DIR 	:= work transcript *~ vsim.wlf *.log dgs.dbg dmslogdir covhtmlreport
 
 # sources 
