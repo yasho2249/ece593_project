@@ -51,10 +51,10 @@ end
 
 //task for reset
 task reset_rojo();
-    reset_n = 1'b0;
+    reset = 1'b0;
     @(negedge clk);
     @(negedge clk);
-    reset_n = 1'b1;
+    reset = 1'b1;
     local_key = 0;
 endtask: reset_rojo
 
@@ -66,7 +66,9 @@ task send_op_rojo(input bit [PORT_WIDTH-1:0] t_in_port,
     output bit t_write_strobe, t_read_strobe, t_interrupt_ack,
     output bit [PORT_WIDTH-1:0] t_out_port);
 
-// write initial conditions
+   in_port = t_in_port;
+
+
   
 endtask: send_op
 
