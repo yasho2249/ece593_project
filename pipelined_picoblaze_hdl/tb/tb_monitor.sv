@@ -7,3 +7,21 @@ ECE 593: Final Project
 Monitor module for sampling signals from the dut
 
 */
+
+class Monitor
+
+// virtual interface
+virtual intf vif;
+ 
+// mailbox 
+mailbox mbox;
+
+//constructor
+function new(virtual intf vif,mailbox mbox);
+        this.vif = vif;
+        this.mbox = mbox;
+endfunction
+
+task main;
+        forever begin
+endclass
