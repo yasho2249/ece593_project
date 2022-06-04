@@ -37,7 +37,7 @@ instruction:
 		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
 
 tests:
-		vsim -coverage -vopt work.transaction_top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit"
+		vsim -coverage -vopt work.env_top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit"
 
 release:
 		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
