@@ -30,7 +30,7 @@ setup:
 		vmap work work
 
 compile:
-		vlog -coveropt 3 +cover=sbfec +acc duv/kcpsmx3_inc.sv $(DUVS) tb/transaction.sv tb/generator.sv tb/driver.sv tb/enironment.sv tb/env_top.sv $(TBS)
+		vlog -coveropt 3 +cover=sbfec +acc duv/kcpsmx3_inc.sv $(DUVS) tb/transaction.sv tb/generator.sv tb/driver.sv tb/environment.sv tb/env_top.sv $(TBS)
 
 #opt:
 #		#vopt top -o top_optimized +acc

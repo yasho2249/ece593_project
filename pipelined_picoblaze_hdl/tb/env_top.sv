@@ -28,8 +28,8 @@ module env_top;
     intf i_intf(clk, reset);
     test t1(i_intf);
 
-    rojo_bfm bfm(.clk(i_intf.clk),
+    /*ojo_bfm bfm(.clk(i_intf.clk),
                  .reset(i_intf.reset)
                 );
-
+    */
 endmodule

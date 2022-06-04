@@ -1,3 +1,6 @@
+`ifndef __TRANSACTION_SV__
+`define __TRANSACTION_SV__
+
 /*
 
 Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
@@ -45,3 +48,5 @@ module transaction_top();
 	end
 endmodule
 */
+
+`endif

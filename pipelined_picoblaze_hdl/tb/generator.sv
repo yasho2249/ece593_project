@@ -1,6 +1,7 @@
 
 
 //import transaction::*;
+`include "transaction.sv"
 
 class generator;
     

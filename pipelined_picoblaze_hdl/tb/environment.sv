@@ -30,7 +30,7 @@ class environment;
 
     task post_test();
         wait(gen.ended.triggered);
-        wait(gen.rep_count == driv.txn_count);
+        wait(gen.rep_count == drv.txn_count);
     endtask
 
     task run;

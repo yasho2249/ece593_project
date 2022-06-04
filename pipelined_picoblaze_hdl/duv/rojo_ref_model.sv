@@ -9,7 +9,17 @@ Reference model implementing the required fucntionality of the design
 */
 
 
-module rojo_ref_model();
+module rojo_ref_model(
+    input        [7:0]              in_port,        ///< Port input
+    input                           interrupt,      ///< Interrupt request
+    input                           reset,          ///< Reset input
+    input                           clk             ///< Clock input
+    output logic [7:0]              port_id,        ///< Port address.
+    output logic                    write_strobe,   ///< Port output strobe
+    output logic [7:0]              out_port,       ///< Port output
+    output logic                    read_strobe,    ///< Port input strobe
+    output logic                    interrupt_ack,  ///< Interrupt acknowledge
+);
 
 // what all regs and datastructs to create 
 // INT_ENABLE
@@ -18,6 +28,25 @@ module rojo_ref_model();
 // temp_reg which was created for TEST instruction 
 // PORT_ID and PORT_VALUE for input and output instr
 // mem array for scratch pad mem. should be byte type fixed array
+// pc
+
+bit [7:0] s [16];           // Registers
+bit carry_flag, zero_flag;  // Carry and Zero flag
+bit [7:0] temp_reg;         // Temp register used for COMPARE nad other instructions
+bit INT_ENABLE;             // Interrupt Enable register
+bit [9:0] pc;               // Program Counter 
+//byte mem [64];                
+
+
+kcpsmx_scratch scratch_mem(
+    .address(scratch_address),
+    .write_enable(scratch_write_enable),
+    .data_in(scratch_data_in),
+    .data_out(scratch_data_out),
+    .reset(reset),
+    .clk(clk)
+);
+
 
 case (instruction)
     // JUMP
@@ -370,11 +399,17 @@ case (instruction)
                             case (instruction)
                                 // STORE PP
                                 18'b101110xxxx00xxxxxx: begin
-                                                        mem[instruction[5:0]] = s[instruction[11:8]];
+                                                        scratch_address = instruction[5:0];
+                                                        scratch_write_enable = 1'b1;
+                                                        scratch_data_in = s[instruction[11:8]];
+                                                        scratch_data_out = z;
                                                         end
                                 // STORE (sY)
                                 18'b101111xxxxxxxx0000: begin
-                                                        mem[s[instruction[7:4]]] = s[instruction[11:8]];
+                                                        scratch_address = s[instruction[7:4]];
+                                                        scratch_write_enable = 1'b1;
+                                                        scratch_data_in = s[instruction[11:8]];
+                                                        scratch_data_out = z;
                                                         end
                             endcase
                             end
@@ -383,11 +418,11 @@ case (instruction)
                             case (instruction)
                                 // FETCH PP heheheheh
                                 18'b000110xxxx00xxxxxx: begin
-                                                        s[instruction[11:8]] = mem[instruction[5:0]];
+                                                        s[instruction[11:8]] = scratch_mem[instruction[5:0]];
                                                         end
                                 // FETCH (sY)
                                 18'b000110xxxx00xxxxxx: begin
-                                                        s[instruction[11:8]] = mem[s[instruction[7:4]]];
+                                                        s[instruction[11:8]] = scratch_mem[s[instruction[7:4]]];
                                                         end
                             endcase
                             end
