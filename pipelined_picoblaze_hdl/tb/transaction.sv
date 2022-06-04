@@ -18,21 +18,16 @@ class transaction;
     bit [17:0]   instr;
 
 	int f;
+
     function void write_mem();
-	
-	instr = {opcode, sx, sy, constant};
+		instr = {opcode, sx, sy, constant};
         f = $fopen("./add_test.mem", "a");
         $fwrite(f, "%h\n", instr);
         $fclose(f);
-
     endfunction
-endclass //generator 
+endclass 
 
-//class operation_generator;
-  //  rand var opcode_t;
-
-endclass
-
+/*
 module transaction_top();
 	
 	bit [5:0]  opcode;
@@ -49,3 +44,4 @@ module transaction_top();
 	end
 	end
 endmodule
+*/
