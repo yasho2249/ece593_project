@@ -13,7 +13,7 @@ TARGET		:= picoblaze_hdl
 # Directories for source files and builds
 SRC_DIR 	:= duv
 TB_DIR		:= tb
-RNDT_FL		:= tb/coverage.sv tb/rojo_bfm.sv 
+RNDT_FL		:= tb/coverage.sv tb/rojo_bfm.sv tb/tb_monitor.sv tb/scoreboard.sv 
 IGFL		:= duv/rojo_ref_model.sv
 BUILD_DIR 	:= work transcript *~ vsim.wlf *.log dgs.dbg dmslogdir covhtmlreport
 
@@ -30,7 +30,7 @@ setup:
 		vmap work work
 
 compile:
-		vlog -coveropt 3 +cover=sbfec +acc duv/kcpsmx3_inc.sv $(TBS) $(DUVS)
+		vlog -coveropt 3 +cover=sbfec +acc duv/kcpsmx3_inc.sv $(DUVS) $(TBS)
 
 #opt:
 #		#vopt top -o top_optimized +acc

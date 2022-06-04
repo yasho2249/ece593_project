@@ -1,5 +1,5 @@
 
-//import transaction::*;
+
 
 interface intf(input logic clk, reset);
    
@@ -39,8 +39,9 @@ class driver;
 
     // main driver task
     task main;
+ 	
         forever begin
-            transaction txn;
+	    transaction txn;
             gen_driv.get(txn);
             @(posedge vif.clk);
             vif.opcode = txn.opcode;

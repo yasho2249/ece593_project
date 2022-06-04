@@ -48,7 +48,7 @@ program test(intf intf);
    
     initial begin
         env = new(intf);
-        env.gen.rep_count =  if($value$plusargs("RUNS=%d", runs));;
+        env.gen.rep_count = 10; //if($value$plusargs("RUNS=%d", runs));;
         env.run();
     end
 
