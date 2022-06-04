@@ -8,7 +8,7 @@ class generator;
     rand transaction txn;
 
     // mailbox 
-    mailbox gen_driv;
+   mailbox gen_driv;
 
     // number of items to generate
     int rep_count;
