@@ -71,7 +71,6 @@ module env_top;
 
     rojo_bfm bfm(.clk(i_intf.clk),
                  .reset(i_intf.reset), 
-                 //other var
                 );
 
 endmodule

@@ -3,7 +3,9 @@
 interface intf(input logic clk, reset);
    
   //declaring the signals
-
+    logic [5:0] opcode;
+    logic [3:0] sx, sy, constant; 
+    logic [17:0] instr;
    
 endinterface
 
@@ -26,7 +28,10 @@ class driver;
     task reset;
         wait(vif.reset);
         $display("DRIVER RESET INITIATE");
-        //add intf var
+        vif.opcode = 0;
+        vif.sx = 0;
+        vif.sy = 0;
+        vif.instr = 0;
         wait(!vif.reset);
         $display("DRIVER RESET END");
     endtask
@@ -37,7 +42,10 @@ class driver;
             transaction txn;
             gen_driv.get(txn);
             @(posedge vif.clk);
-            // var
+            vif.opcode = txn.opcode;
+            vif.sx = txn.sx;
+            vif.sy =  txn.sy;
+            vif.instr = txn.instr;
             @(posedge vif.clk);
             txn.write_mem();
             txn_count++;
