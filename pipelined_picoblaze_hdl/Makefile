@@ -13,12 +13,14 @@ TARGET		:= picoblaze_hdl
 # Directories for source files and builds
 SRC_DIR 	:= duv
 TB_DIR		:= tb
-RNDT_FL		:= tb/coverage.sv tb/rojo_bfm.sv duv/rojo_ref_model.sv
+RNDT_FL		:= tb/coverage.sv tb/rojo_bfm.sv 
+IGFL		:= duv/rojo_ref_model.sv
 BUILD_DIR 	:= work transcript *~ vsim.wlf *.log dgs.dbg dmslogdir covhtmlreport
 
 # sources 
 SRCS	:= $(wildcard $(SRC_DIR)/*.sv)
 TBS	:= $(filter-out $(RNDT_FL), $(wildcard $(TB_DIR)/*.sv))
+DUVS	:= $(filter-out $(IGFL), $(wildcard $(SRC_DIR)/*.sv))
 
 # build recipies
 all: setup compile opt $(TARGET)
