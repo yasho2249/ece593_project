@@ -70,7 +70,7 @@ module env_top;
     test t1(i_intf);
 
     rojo_bfm bfm(.clk(i_intf.clk),
-                 .reset(i_intf.reset), 
+                 .reset(i_intf.reset)
                 );
 
 endmodule

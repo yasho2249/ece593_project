@@ -1,6 +1,6 @@
 
 
-import transaction::*;
+//import transaction::*;
 
 class generator;
     
@@ -23,7 +23,7 @@ class generator;
 
     //
     task main();
-        repeat begin
+        repeat (1) begin
             txn = new();
             if(!txn.randomize()) $fatal("txn randomization failed");
             gen_driv.put(txn);
