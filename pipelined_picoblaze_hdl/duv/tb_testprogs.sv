@@ -18,9 +18,6 @@ NOTE: (RK) I included 2 of the teams test programs as examples.
 
 */
 
-
-import kcpsmx3_inc::*;
-
 //`include "coverage.sv"
 
 module alt_rojo_tb;
@@ -29,8 +26,12 @@ parameter tck = 10, program_size = 1024;
 
 string memfile[] = '{
 	// ADD ADDITIONAL TESTS HERE
-    "add_test.mem"
+    "test.mem"
 };
+
+//string memfile [];
+//memfile [] = new ["test%0d.mem"];
+
 
 reg clk, rst; // clock, reset
 reg [OPERAND_WIDTH-1:0] prt[0:PORT_SIZE];

@@ -26,13 +26,27 @@ class generator;
 
     //
     task main();
-        repeat (1024) begin
-            txn = new();
-            txn.randomize();
-        
-        txn.write_mem();
-	    if(!txn.randomize()) $fatal("txn randomization failed");
-            gen_driv.put(txn);
+        int tests;
+        int test_name_extention = 0;
+        int test_files;
+        int f;
+        string filename;
+
+        if ($value$plusargs ("NumberOfTests=%d", tests))
+        test_files = (tests/1024) + 1;
+        repeat (test_files) begin
+            $sformat(filename, "test%0d.mem", test_name_extention);
+		    f = $fopen(filename, "a");
+            $fwrite(f, "@000\n");
+            $fclose(f);
+            repeat (1024) begin
+                txn = new();
+                txn.randomize();
+            txn.write_mem(test_name_extention);
+	        if(!txn.randomize()) $fatal("txn randomization failed");
+                gen_driv.put(txn);
+            end
+        test_name_extention = test_name_extention + 1;
         end
         -> ended;
     endtask

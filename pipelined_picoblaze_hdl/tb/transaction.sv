@@ -47,7 +47,7 @@ class transaction;
 	// For specific regs or constants implement args functionality
 	rand bit [3:0]  sx, sy;
 	rand bit [7:0]	constant; 
-    bit [17:0]   instr;
+    bit [17:0]   	instr;
 
 	constraint control_type {
 		control_opcode inside {5'b11010, 5'b11000, 5'b10101, 5'b11100};
@@ -87,8 +87,9 @@ class transaction;
 
 	int f;
 	string txn_type;
+	string filename;
 
-    function void write_mem();
+    function void write_mem(int file_ext);
 
 		if ($value$plusargs ("TXN=%s", txn_type)) 
             if (txn_type == "Random") begin
@@ -128,8 +129,9 @@ class transaction;
             end
 
 			else $fatal ("No valid Args");
-
-        f = $fopen("./add_test.mem", "a");
+		
+        $sformat(filename, "test%0d.mem", file_ext);
+		f = $fopen(filename, "a");
         $fwrite(f, "%h\n", instr);
         $fclose(f);
     endfunction
