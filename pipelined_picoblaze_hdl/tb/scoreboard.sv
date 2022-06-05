@@ -9,35 +9,18 @@ Scoreboard module
 */
 
 
-class Scoreboard
-    virtual rojo_bfm bfm;
+class scoreboard
 
-    function new (virtual rojo_bfm b);
-    bfm = b;
-    endfunction : new
+    mailbox mon_scb;
 
-    //writing a task for the execute stage
-    //will add more such tasks for all the stages
-    task exec();
-     int known_result;
-     forever begin : self_check
-        @(posedge bfm.done)
-            #5;
-            case (bfm.opcode)
-                add_op :known_result = bfm.A + bfm.B;
-                sub_op :known_result = bfm.A - bfm.B;
-                or_op :known_result = bfm.A | bfm.B;
-                and_op :known_result = bfm.A & bfm.B;
-                xor_op :known_result = bfm.A ^ bfm.B;
-                //adding all the operations
-            endcase
+    function new(mailbox mon_scb);
+        this.mon_scb = mon_scb;
+    endfunction
 
-        //if the operation is not performed as per what is intended, throw an error
-        if(known_result != bfm.result)
-         $error("Operation FAILED: A = %0h B = %0h OPCODE = %s RESULT = %0h", bfm.A, bfm.B, bfm.opcode, bfm.rsult);
-
-     end : self_check
-    endtask : exec
-
+    task main;
+        transaction txn;
+        forever begin
+            mon_scb.get(txn);
+            
+        end
 endclass : scoreboard
-
