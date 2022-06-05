@@ -23,4 +23,5 @@ class scoreboard
             mon_scb.get(txn);
             
         end
+    endtask
 endclass : scoreboard

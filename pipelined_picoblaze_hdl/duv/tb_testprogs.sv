@@ -18,6 +18,8 @@ NOTE: (RK) I included 2 of the teams test programs as examples.
 
 */
 
+import kcpsmx3_inc::*;
+
 //`include "coverage.sv"
 import kcpsmx3_inc::*;
 `include "test.sv"

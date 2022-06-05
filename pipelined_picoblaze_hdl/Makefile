@@ -26,6 +26,7 @@ DUVS	:= $(filter-out $(IGFL), $(wildcard $(SRC_DIR)/*.sv))
 all: setup compile opt $(TARGET)
 
 setup:
+		python3 $(SRC_DIR)/script.py 5000
 		vlib work
 		vmap work work
 
@@ -35,14 +36,14 @@ compile:
 #opt:
 #		#vopt top -o top_optimized +acc
 
-instruction:
+release:
 		vsim -coverage -vopt work.alt_rojo_tb -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
 
 tests:
-		vsim -coverage -vopt work.env_top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" +TXN="All" +NumberOfTests="5000"
+		vsim -coverage -vopt work.env_top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all" +TXN="Logical" +NumberOfTests="5000"
 
-release:
-		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
+#release:
+#		vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -cvg -codeAll func_cov; run -all; quit" 
 
 report:
 		vcover report -verbose func_cov > report_func_cov.txt
@@ -57,7 +58,7 @@ build: all
 .DEFAULT_GOAL	:= build
 
 clean:
-		rm -rf $(BUILD_DIR) $(TARGET) *.mem
+		rm -rf $(BUILD_DIR) $(TARGET) *.mem *.sv
 		@echo "Cleanup done!"
 
 info:

@@ -35,6 +35,7 @@ class Monitor
                 txn.write_mem();
                 mon_scb.put(txn);
                 $display("MONITOR");
+                end
         endtask
 
 endclass        
