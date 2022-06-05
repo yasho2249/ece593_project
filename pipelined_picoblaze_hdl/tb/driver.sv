@@ -49,7 +49,7 @@ class driver;
             vif.sy =  txn.sy;
             vif.instr = txn.instr;
             @(posedge vif.clk);
-            repeat (1024) begin
+            repeat (1) begin
                 txn.write_mem();
             end
             txn_count++;

@@ -26,7 +26,9 @@ class generator;
     task main();
         repeat (1024) begin
             txn = new();
-            if(!txn.randomize()) $fatal("txn randomization failed");
+            txn.randomize();
+	    txn.write_mem();
+	    if(!txn.randomize()) $fatal("txn randomization failed");
             gen_driv.put(txn);
         end
         -> ended;
