@@ -7,6 +7,9 @@ ECE 593: Final Project
 Coverage module consist of Input covergroups 
 
 */
+`ifndef __COVERAGE_SV__
+`define __COVERAGE_SV__
+
 `include "blockram.sv"
 //`include "kcpsmx_register.sv"
 `include "kcpsmx_scratch.sv"
@@ -155,3 +158,5 @@ module coverage_ifid (rojo_bfm bfm);
 
 
 endmodule : coverage_ifid
+
+`endif

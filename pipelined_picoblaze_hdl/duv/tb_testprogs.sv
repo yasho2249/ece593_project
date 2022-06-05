@@ -21,6 +21,7 @@ NOTE: (RK) I included 2 of the teams test programs as examples.
 
 import kcpsmx3_inc::*;
 
+//`include "coverage.sv"
 
 module alt_rojo_tb;
 
