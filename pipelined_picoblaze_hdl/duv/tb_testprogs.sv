@@ -58,7 +58,7 @@ disassembler dis(
     .kcpsm3_opcode(opcode)
 );
 
-coverage ci (bfm)
+//coverage ci (bfm);
 integer			i;			// loop index
 
 
