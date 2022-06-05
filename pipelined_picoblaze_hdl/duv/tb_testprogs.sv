@@ -19,14 +19,15 @@ NOTE: (RK) I included 2 of the teams test programs as examples.
 */
 
 //`include "coverage.sv"
-
+import kcpsmx3_inc::*;
+`include "test.sv"
 module alt_rojo_tb;
 
 parameter tck = 10, program_size = 1024;
 
 string memfile[] = '{
 	// ADD ADDITIONAL TESTS HERE
-    "test.mem"
+    "test0.mem"
 };
 
 //string memfile [];
