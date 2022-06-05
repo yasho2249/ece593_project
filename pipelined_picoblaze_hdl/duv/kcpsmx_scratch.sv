@@ -33,6 +33,8 @@
 	ShubhankaSPM, and Supraj Vastrad for ECE 571 Winter 2020 final project
 */
 
+`ifndef __KCPSMX_SCRATCH_SV__
+`define __KCPSMX_SCRATCH_SV__
 
 import kcpsmx3_inc::*;
 
@@ -58,3 +60,5 @@ begin
 end
 
 endmodule
+
+`endif

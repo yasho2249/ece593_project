@@ -7,6 +7,9 @@
 	Acknowledgment:  Created and tested by SethR, MilesS, ShubhankaSPM, and Supraj Vastrad
 	for ECE 571 Winter 2020 final project
 */
+`ifndef __BLOCKRAM_SV__
+`define __BLOCKRAM_SV__
+
 import kcpsmx3_inc::*;
 
 module blockram(
@@ -30,3 +33,5 @@ always_ff @(posedge clk)
         else dout <= ram[ad];
 
 endmodule
+
+`endif
