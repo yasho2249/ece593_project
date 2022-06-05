@@ -8,7 +8,7 @@ Coverage module consist of Input covergroups
 
 */
 `include "blockram.sv"
-`include "kcpsmx_register.sv"
+//`include "kcpsmx_register.sv"
 `include "kcpsmx_scratch.sv"
 
 
