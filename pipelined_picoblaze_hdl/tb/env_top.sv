@@ -1,3 +1,12 @@
+/*
+
+Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
+ECE 593: Final Project
+        Testebench for verification of RojoBlaze
+
+Environment class top for RojoBlaze 
+*/
+
 
 `include "environment.sv"
 
@@ -7,7 +16,7 @@ program test(intf intf);
    
     initial begin
         env = new(intf);
-        env.gen.rep_count = 10; //if($value$plusargs("RUNS=%d", runs));;
+        env.gen.rep_count = 10; 
         env.run();
     end
 
@@ -29,8 +38,4 @@ module env_top;
     intf i_intf(clk, reset);
     test t1(i_intf);
 
-    /*ojo_bfm bfm(.clk(i_intf.clk),
-                 .reset(i_intf.reset)
-                );
-    */
 endmodule

@@ -1,6 +1,12 @@
+/*
 
+Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
+ECE 593: Final Project
+        Testebench for verification of RojoBlaze
 
-//import transaction::*;
+Generator class for RojoBlaze 
+*/
+
 `include "transaction.sv"
 
 class generator;

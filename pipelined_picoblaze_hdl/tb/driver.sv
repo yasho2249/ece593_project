@@ -1,3 +1,11 @@
+/*
+
+Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
+ECE 593: Final Project
+        Testebench for verification of RojoBlaze
+
+Driver Class for RojoBlaze 
+*/
 
 `include "transaction.sv"
 

@@ -7,17 +7,16 @@ ECE 593: Final Project
 Coverage module consist of Input covergroups 
 
 */
+
 `ifndef __COVERAGE_SV__
 `define __COVERAGE_SV__
 
-`include "blockram.sv"
-//`include "kcpsmx_register.sv"
-`include "kcpsmx_scratch.sv"
+
 
 
 module coverage_ifid (rojo_bfm bfm);
     
-   // import rojobpkg::*;
+   
 
     // Inputs _rojo
     bit [PORT_WIDTH-1:0]    in_port;        // Port input
@@ -59,7 +58,7 @@ module coverage_ifid (rojo_bfm bfm);
     // Covergroup for inputs
     covergroup cg_input_signals
         // Coverpoints for inputs
-        rojob_in_port :     coverpoint cp_Input_port {
+        rojob_in_port :     coverpoint in_port {
                 option.at_least = 1;    // more than 1??
             bins IN0 = {8'h00};
             bins IN1 = {[8'h01:8'hFE]};
@@ -69,8 +68,8 @@ module coverage_ifid (rojo_bfm bfm);
             // eg. {8'h00 => 8'h01}
 
         }
-        rojob_interrupt :   coverpoint cp_Interrupt;
-        rojob_reset :       coverpoint cp_Reset;
+        rojob_interrupt :   coverpoint interrupt;
+        rojob_reset :       coverpoint reset;
 
         // Crosspoints for inputs
 

@@ -5,7 +5,6 @@ ECE 593: Final Project
         Testebench for verification of RojoBlaze
 
 TESTER module for RojoBlaze 
-***** WORK IN PROGRESS *****
 */
 
 module alu_tester(rojo_bfm bfm);

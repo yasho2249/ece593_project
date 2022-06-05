@@ -5,7 +5,7 @@ ECE 593: Final Project
         Testebench for verification of RojoBlaze
 
 BFM module for RojoBlaze 
-***** WORK IN PROGRESS *****
+
 */
 
 interface rojo_bfm;
@@ -70,7 +70,7 @@ task send_op_rojo(input bit [PORT_WIDTH-1:0] t_in_port,
 
 
   
-endtask: send_op
+endtask: send_op_rojo
 
 //send_op task for BFM
 task send_op_alu(input opcode_t t_operation, input shift_op_t t_shift_operation,
@@ -128,6 +128,6 @@ else if (t_operation == RS) begin
 end 
 else    zero_out = t_zero_out;
   
-endtask: send_op
+endtask: send_op_alu
 
 endinterface: rojo_bfm
