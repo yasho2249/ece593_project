@@ -5,11 +5,13 @@
 
 class generator;
     
+    string txn_type;
+
     // transaction class declaration
     rand transaction txn;
-
+    
     // mailbox 
-   mailbox gen_driv;
+    mailbox gen_driv;
 
     // number of items to generate
     int rep_count;
@@ -27,7 +29,8 @@ class generator;
         repeat (1024) begin
             txn = new();
             txn.randomize();
-	    txn.write_mem();
+        
+        txn.write_mem();
 	    if(!txn.randomize()) $fatal("txn randomization failed");
             gen_driv.put(txn);
         end
