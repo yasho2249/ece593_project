@@ -1,3 +1,8 @@
+# Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
+# ECE 593: Final Project
+#         Testebench for verification of RojoBlaze
+# Python Script to add the multiple mem files generated to create a variable to that runs the mem file in form of a test.sv file 
+
 import sys
 f = open("test.sv", "w")
 tests_list = []
