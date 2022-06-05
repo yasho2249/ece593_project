@@ -45,6 +45,17 @@ module coverage_ifid (rojo_bfm bfm);
     bit [SCRATCH_WIDTH-1:0] data_in;
     bit [SCRATCH_WIDTH-1:0] data_out;
 
+    // alu  
+    bit opcode_t operation;
+    bit shift_op_t shift_operation;
+    bit shift_direction;
+    bit shift_constant;
+    bit [OPERAND_WIDTH-1:0] operand_a, operand_b;	
+    bit carry_in;
+    bit [OPERAND_WIDTH-1:0] result;
+    bit zero_out;
+    bit carry_out;
+
     // Covergroup for inputs
     covergroup cg_input_signals
         // Coverpoints for inputs
@@ -86,6 +97,30 @@ module coverage_ifid (rojo_bfm bfm);
         // scratch
         rojob_in_write_enable : coverpoint write_enable;
 
+        // alu
+        rojob_in_operation : coverpoint operation;
+        rojob_in_shiftop : coverpoint shift_operation;
+        rojob_in_shiftdir : coverpoint shift_direction;
+        rojob_in_shiftcons : coverpoint shift_constant;
+        rojob_in_operanda : coverpoint operand_a {
+            bins opa0 = {[OPERAND_WIDTH-1]'h00};
+            bins opa1 = {[OPERAND_WIDTH-1]'h01:[OPERAND_WIDTH-1]'hFF};
+        }
+        rojob_in_operandb : coverpoint operand_b {
+            bins opb0 = {[OPERAND_WIDTH-1]'h00};
+            bins opb1 = {[OPERAND_WIDTH-1]'h01:[OPERAND_WIDTH-1]'hFF};
+        }
+        rojob_in_carryin : coverpoint carry_in;
+
+        rojob_in_operationxopa : cross rojob_in_operation, rojob_in_operanda;
+        rojob_in_operationxopb : cross rojob_in_operation, rojob_in_operandb;
+        rojob_in_shiftopxshiftdir : cross rojob_in_shiftop, rojob_in_shiftdir;
+        rojob_in_shiftopxshiftcons : cross rojob_in_shiftop, rojob_in_shiftcons;
+        rojob_in_shiftdirxshiftcons : cross rojob_in_shiftdir, rojob_in_shiftcons;
+        rojob_in_operandaxb : cross rojob_in_operanda, rojob_in_operandb;
+        rojob_in_operandaxcin : cross rojob_in_operanda, rojob_in_carryin;
+        rojob_in_operandbxcin : cross rojob_in_operandb, rojob_in_carryin;
+
     endgroup 
 
     // Covergroup for Output Signals
@@ -119,8 +154,15 @@ module coverage_ifid (rojo_bfm bfm);
             bins dout1 = {[WIDTH-1]'h01:[WIDTH-1]'hFF};
         }
     
-        
-
+        //alu
+        rojob_out_result : coverpoint result {
+            bins res0 = {[OPERAND_WIDTH-1]'h00};
+            bins res1 = {[OPERAND_WIDTH-1]'h01:[OPERAND_WIDTH-1]'hFF};
+        }
+        rojob_out_zout : coverpoint zero_out;
+        rojob_out_carryout : coverpoint carry_out;
+        rojob_out_resultxzout : cross rojob_out_result, rojob_out_zout;
+        rojob_out_resultxcout : cross rojob_out_result, rojob_out_carryout;
     endgroup
     /*
     // Covergroup for Instructions
