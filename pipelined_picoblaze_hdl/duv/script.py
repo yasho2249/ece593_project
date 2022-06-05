@@ -2,7 +2,7 @@ import sys
 f = open("test.sv", "w")
 tests_list = []
 num_tests = int(sys.argv[1])
-num_tests = (num_tests / 1024) + 1
+num_tests = int((num_tests / 1024) + 1)
 for i in range(0, num_tests):
     tests_list.append(f"\"test{i}.mem\"")
 
