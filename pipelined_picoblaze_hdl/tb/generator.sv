@@ -40,19 +40,29 @@ class generator;
 
         if ($value$plusargs ("NumberOfTests=%d", tests))
         test_files = (tests/1024) + 1;
+
+        // Main outerloop to create "n" number of files. 1024 testcases each
         repeat (test_files) begin
             $sformat(filename, "test%0d.mem", test_name_extention);
 		    f = $fopen(filename, "a");
             $fwrite(f, "@000\n");
             $fclose(f);
-            repeat (1024) begin
+            repeat (1023) begin
                 txn = new();
                 txn.randomize();
-            txn.write_mem(test_name_extention);
-	        if(!txn.randomize()) $fatal("txn randomization failed");
-                gen_driv.put(txn);
+                txn.write_mem(test_name_extention);
+	            if(!txn.randomize()) $fatal("txn randomization failed");
+                    gen_driv.put(txn);
             end
-        test_name_extention = test_name_extention + 1;
+            // Last instruction to write to the last address in the memory 
+            // Requirement of the given tb_testprogs.sv testbench 
+            $sformat(filename, "test%0d.mem", test_name_extention);
+		    f = $fopen(filename, "a");
+            $fwrite(f, "2e03f\n");
+            $fclose(f);
+
+            // Change file name
+            test_name_extention = test_name_extention + 1;
         end
         -> ended;
     endtask

@@ -69,7 +69,6 @@ info:
 	@echo "make setup: sets up the work lib"
 	@echo "make compile: compiles the files in duv/ and tb/"
 	@echo "make tests: builds .mem for the DUV"
-	@echo "make instruction: build instructions to be executed"
 	@echo "make release: runs the design unit"
 	@echo "make report: makes functional coverage report in txt format"
 	@echo "make html: makes GUI coverage report"

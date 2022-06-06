@@ -1,6 +1,3 @@
-`ifndef __TRANSACTION_SV__
-`define __TRANSACTION_SV__
-
 /*
 
 Group 3: Yashodhan Wagle, Ramaa Potnis, Supreet Gulavani
@@ -13,6 +10,9 @@ Since the picoblaze architecture reads only from the ROM, we have created a tran
 in the form of .mem files. 
 
 */
+
+`ifndef __TRANSACTION_SV__
+`define __TRANSACTION_SV__
 
 class transaction;
     
@@ -49,6 +49,8 @@ class transaction;
 	rand bit [7:0]	constant; 
     bit [17:0]   	instr;
 
+
+	// Constraints for instruction type
 	constraint control_type {
 		control_opcode inside {5'b11010, 5'b11000, 5'b10101, 5'b11100};
 	}
@@ -91,6 +93,7 @@ class transaction;
 
     function void write_mem(int file_ext);
 
+		// ARGS implementation for selection of instruction type
 		if ($value$plusargs ("TXN=%s", txn_type)) 
             if (txn_type == "Random") begin
 				instr = {rand_opcode, sx, constant};
@@ -130,6 +133,7 @@ class transaction;
 
 			else $fatal ("No valid Args");
 		
+		// File naming and wrinting (appending) logic
         $sformat(filename, "test%0d.mem", file_ext);
 		f = $fopen(filename, "a");
         $fwrite(f, "%h\n", instr);

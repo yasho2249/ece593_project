@@ -53,4 +53,17 @@ assign y_data_out = dpr[y_address];
 always_ff @(negedge clk)
     if (w_write_enable) dpr[w_address] <= w_data_in;
 
+
+// Register Load Store Assertions
+/*
+property load_assert;
+@(posedge clk) (idex_operation == LOAD) |-> (w_write_enable) |=> w_data_in == w_data_in |=> dpr[$past (w_address,1)] == $past (w_data_in,1);
+endproperty
+
+a21: assert property(load_assert)
+	$display ("LOAD performed successfully");
+else
+	$error ("LOAD not successful");
+*/
+
 endmodule

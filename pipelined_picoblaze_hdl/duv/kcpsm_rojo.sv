@@ -430,4 +430,35 @@ begin
 end
 endtask
 
+// Program Counter functionality Assertions
+/*
+property ifid_check;
+	@(posedge clk) (ifid_pcplus2 == (program_counter + 2'b01));
+	endproperty
+
+a31: assert property (ifid_check)
+	$display ("IFID works");
+	else
+	$error ("IFID fails");
+
+
+property pc_rollover;
+	@(posedge clk) (program_counter == 10'h3FF) |=> (program_counter == 10'h000);
+	endproperty
+
+a32: assert property (pc_rollover)
+	$display ("PC rollover successful");
+	else
+	$error ("PC rollover failed");
+
+property branch_taken;
+	@(posedge clk) (idex_operation == JUMP) |-> (ifid_pcplus2 != (program_counter + 2'b01));
+	endproperty
+
+a33: assert property (branch_taken)
+	$display ("Branch taken");
+	else
+	$error ("Branching failed");
+*/
+
 endmodule

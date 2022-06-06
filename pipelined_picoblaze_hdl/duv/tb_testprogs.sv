@@ -27,10 +27,14 @@ module alt_rojo_tb;
 
 parameter tck = 10, program_size = 1024;
 
-string memfile[] = '{
+/*string memfile[] = '{
 	// ADD ADDITIONAL TESTS HERE
-    "test0.mem"
-};
+    "test0.mem", 
+	"test1.mem", 
+	"test2.mem", 
+	"test3.mem", 
+	"test4.mem"
+};*/
 
 //string memfile [];
 //memfile [] = new ["test%0d.mem"];

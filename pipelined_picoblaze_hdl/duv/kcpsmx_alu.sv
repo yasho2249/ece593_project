@@ -130,4 +130,161 @@ begin: on_alu
     zero_out = ~|result;
 end
 
+
+// Assertions for ALU Execution functions 
+/*
+property add_assert;
+@(posedge clk) (operation == ADD) |->  ({carry_out, result} == (operand_a + operand_b))&&(zero_out == (result ? 0 : 1));
+endproperty 
+a1: assert property (add_assert)
+	$display ("Addition  successful");
+else
+	$error ("Addition  failed");
+
+property sub_assert;
+@(posedge clk) (operation == SUB) |->  (result == (operand_a - operand_b))&&(zero_out == (result ? 0 : 1));
+endproperty 
+a15: assert property (sub_assert)
+	$display ("Subtraction successful");
+else
+	$error ("Subtraction failed");
+
+property addcy_assert;
+@(posedge clk) (operation == ADDCY) |->  ({carry_out, result} == (operand_a + operand_b + carry_in))&&(zero_out == (result ? 0 : 1));
+endproperty 
+a16: assert property (addcy_assert)
+	$display ("Addition with carry successful");
+else
+	$error ("Addition with carry failed");
+
+property subcy_assert;
+@(posedge clk) (operation == ADDCY) |->  ({carry_out, result} == (operand_a + operand_b + carry_in))&&(zero_out == (result ? 0 : 1));
+endproperty 
+a17: assert property (subcy_assert)
+	$display ("Subtraction with carry successful");
+else
+	$error ("Subtraction with carry failed");
+
+property and_assert;
+@(posedge clk) (operation == AND) |->  (result == (operand_a & operand_b))&&(carry_out == 1'b0)&&(zero_out == (result ? 0 : 1));
+endproperty 
+a2: assert property (and_assert)
+	$display ("AND successful");
+else
+	$error ("AND not successful");
+
+property or_assert;
+@(posedge clk) (operation == OR) |->  (result == (operand_a | operand_b))&&(carry_out == 1'b0)&&(zero_out == (result ? 0 : 1));
+endproperty 
+a13: assert property (or_assert)
+	$display ("OR successful");
+else
+	$error ("OR not successful");
+
+property xor_assert;
+@(posedge clk) (operation == XOR) |->  (result == (operand_a ^ operand_b))&&(carry_out == 1'b0)&&(zero_out == (result ? 0 : 1));
+endproperty 
+a14: assert property (xor_assert)
+	$display ("XOR successful");
+else
+	$error ("XOR not successful");
+
+property sr1_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == SC)&&(shift_direction == 1'b1)&&(shift_constant == 1'b1)) |->  (result == (operand_a>>1) + 8'h80)&&(carry_out == operand_a[0])&&(zero_out == 1'b0);
+endproperty 
+a3: assert property (sr1_assert)
+	$display ("SR1 successful");
+else
+	$error ("SR1 not successful");
+
+property sr0_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == SC)&&(shift_direction == 1'b1)&&(shift_constant == 1'b0)) |->  (result == (operand_a>>1))&&(carry_out == operand_a[0])&&(zero_out == (result ? 0 : 1));
+endproperty 
+a4: assert property (sr0_assert)
+	$display ("SR0 successful");
+else
+	$error ("SR0 not successful");
+
+property srX_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == RL_SRX)&&(shift_constant == 1'b0)&&(shift_direction == 1'b1)) |->  (result == (operand_a>>>1))&&(carry_out == operand_a[0])&&(zero_out == (result ? 0 : 1));
+endproperty 
+a5: assert property (srX_assert)
+	$display ("SRX successful");
+else
+	$error ("SRX not successful");
+
+property srA_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == SA)&&(shift_constant == 1'b0)&&(shift_direction == 1'b1)) |->  (result == (operand_a>>1+(carry_in?8'h80:8'h00)))&&(carry_out == operand_a[0])&&(zero_out == (result ? 0 : 1));
+endproperty 
+a6: assert property (srA_assert)
+	$display ("SRA successful");
+else
+	$error ("SRA not successful");
+
+property rr_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == RR_SLX)&&(shift_constant == 1'b0)&&(shift_direction == 1'b1)) |->  (result == (operand_a>>1+(operand_a[0]?8'h80:8'h00)))&&(carry_out == operand_a[0])&&(zero_out == (result ? 0 : 1));
+endproperty 
+a7: assert property (rr_assert)
+	$display ("RR successful");
+else
+	$error ("RR not successful");
+
+property sl1_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == SC)&&(shift_constant == 1'b1)&&(shift_direction == 1'b0)) |->  ({carry_out, result} == {operand_a, 1'b1})&&(zero_out == 1'b0);
+endproperty 
+a8: assert property (sl1_assert)
+	$display ("SL1 successful");
+else
+	$error ("SL1 not successful");
+
+property sl0_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == SC)&&(shift_direction == 1'b0)&&(shift_constant == 1'b0)) |->  (result == (operand_a<<1))&&(carry_out == operand_a[7])&&(zero_out == (result ? 0 : 1));
+endproperty 
+a9: assert property (sl0_assert)
+	$display ("SL0 successful");
+else
+	$error ("SL0 not successful");
+
+property slX_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == RR_SLX)&&(shift_constant == 1'b0)&&(shift_direction == 1'b0)) |->  (result == (operand_a<<1 + operand_a[0]))&&(carry_out == operand_a[7])&&(zero_out == (result ? 0 : 1));
+endproperty 
+a10: assert property (slX_assert)
+	$display ("SLX successful");
+else
+	$error ("SLX not successful");
+
+property slA_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == SA)&&(shift_constant == 1'b0)&&(shift_direction == 1'b0)) |->  (result == (operand_a<<1+carry_in))&&(carry_out == operand_a[7])&&(zero_out == (result ? 0 : 1));
+endproperty 
+a11: assert property (slA_assert)
+	$display ("SLA successful");
+else
+	$error ("SLA not successful");
+
+property rl_assert;
+@(posedge clk) ((operation == RS)&&(shift_operation == RL_SRX)&&(shift_constant == 1'b0)&&(shift_direction == 1'b0)) |-> ({carry_out, result} == {operand_a, operand_a[7]})&&(zero_out == (result ? 0 : 1));
+endproperty 
+a12: assert property (rl_assert)
+	$display ("RL successful");
+else
+	$error ("RL not successful");
+
+property test_assert;
+@(posedge clk) (operation == TEST) |-> (result == operand_a & operand_b)&&(carry_out == ^result)&&(zero_out == (result ? 0 : 1));
+endproperty 
+a18: assert property (test_assert)
+	$display ("TEST successful");
+else
+	$error ("TEST not successful");
+
+property compare_assert;
+@(posedge clk) (operation == COMPARE) |-> (carry_out == (operand_b > operand_a))&&(zero_out == (operand_a == operand_b));
+endproperty 
+a19: assert property (compare_assert)
+	$display ("COMPARE successful");
+else
+	$error ("COMPARE not successful");
+
+*/
+
 endmodule
