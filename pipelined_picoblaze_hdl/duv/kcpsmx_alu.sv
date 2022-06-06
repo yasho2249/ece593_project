@@ -132,6 +132,7 @@ end
 
 
 // Assertions for ALU Execution functions 
+// Implement Assertions as ARGS for future work.
 /*
 property add_assert;
 @(posedge clk) (operation == ADD) |->  ({carry_out, result} == (operand_a + operand_b))&&(zero_out == (result ? 0 : 1));
